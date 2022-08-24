@@ -8,8 +8,7 @@ export default class Album extends Component {
         data-testid="page-album"
       >
         <Header />
-        <br />
-        Album
+        album
       </div>
     );
   }
