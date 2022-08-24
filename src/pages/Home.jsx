@@ -7,13 +7,11 @@ import Favorites from './Favorites';
 import Profile from './Profile';
 import Edit from './Edit';
 import NotFound from './NotFound';
-import Header from '../components/Header';
 
 export default class Home extends Component {
   render() {
     return (
       <BrowserRouter>
-        <Header />
         <Route
           exact
           path="/"

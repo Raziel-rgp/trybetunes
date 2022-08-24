@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Header from '../components/Header';
 
 export default class Favorites extends Component {
   render() {
@@ -6,6 +7,8 @@ export default class Favorites extends Component {
       <div
         data-testid="page-favorites"
       >
+        <Header />
+        <br />
         Favorites
       </div>
     );

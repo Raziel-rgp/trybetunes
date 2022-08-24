@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Header from '../components/Header';
 
 export default class Search extends Component {
   render() {
@@ -6,7 +7,8 @@ export default class Search extends Component {
       <div
         data-testid="page-search"
       >
-        search
+        <Header />
+        <br />
       </div>
     );
   }
