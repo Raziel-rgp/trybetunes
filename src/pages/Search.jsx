@@ -4,7 +4,7 @@ import Header from '../components/Header';
 import Loading from '../components/Loading';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
 
-// Atualização 1.5.3
+// Atualização 1.6.4 corrigi o nome da versão lol
 // criando variaveis
 
 export default class Search extends Component {
