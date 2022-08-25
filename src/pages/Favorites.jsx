@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Header from '../components/Header';
-// import { addSong, getFavoriteSongs, removeSong } from '../services/favoriteSongsAPI';
+import { addSong, getFavoriteSongs, removeSong } from '../services/favoriteSongsAPI';
 import MusicCard from '../components/MusicCard';
 import Loading from '../components/Loading';
 
@@ -14,14 +14,9 @@ export default class Favorites extends Component {
     this.getListfavSongs();
   }
 
-  /* shouldComponentUpdate(nextProps, nextState) {
+  songRemoved = () => {
     this.getListfavSongs();
-    return true;
   }
-
-  componentDidUpdate(prevProps, prevState) {
-    this.getListfavSongs();
-  } */
 
   getListfavSongs = async () => {
     this.setState({ loading: true,
@@ -34,9 +29,9 @@ export default class Favorites extends Component {
     });
   }
 
-  /* markFavoriteSong = async ({ target }) => {
+  markFavoriteSong = async (i, music) => {
+    const { target } = i;
     const { name, checked } = target;
-    const { music } = this.props;
     this.setState({
       [name]: checked,
       loading: true },
@@ -45,12 +40,15 @@ export default class Favorites extends Component {
         await addSong(music);
       } else {
         await removeSong(music);
+        this.componentDidUpdate = () => {
+          this.getListfavSongs();
+        };
       }
       this.setState({
         favSong: await getFavoriteSongs(),
         loading: false });
     });
-  } */
+  }
 
   render() {
     const {
@@ -71,7 +69,7 @@ export default class Favorites extends Component {
       );
     }
     return (
-      <div>
+      <div data-testid="page-favorites">
         <Header />
         { loading ? (<Loading />) : (
           <div>
@@ -84,7 +82,7 @@ export default class Favorites extends Component {
                     trackName={ music.trackName }
                     previewUrl={ music.previewUrl }
                     music={ music }
-                    onChange={ (i) => this.markFavoriteSong(i, music) }
+                    onChange={ () => this.songRemoved() }
                   />}
               </div>
             ))}

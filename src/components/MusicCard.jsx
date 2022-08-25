@@ -55,12 +55,12 @@ export default class MusicCard extends Component {
   render() {
     const { music } = this.props; // prop passada em Album, lá terá a explicação do que está sendo passado em outro momento;
     const { loading,
-      favSong } = this.state; // states que serão passados;
+      favSong } = this.state; // states que serão passados
     const {
       trackName,
       previewUrl,
       trackId,
-    } = music; // informações de music
+    } = music;
     return (
       <div>
         <p>{ trackName }</p>
