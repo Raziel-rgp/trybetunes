@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Header from '../components/Header';
-import { addSong, getFavoriteSongs, removeSong } from '../services/favoriteSongsAPI';
+// import { addSong, getFavoriteSongs, removeSong } from '../services/favoriteSongsAPI';
 import MusicCard from '../components/MusicCard';
 import Loading from '../components/Loading';
 
@@ -14,14 +14,14 @@ export default class Favorites extends Component {
     this.getListfavSongs();
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
+  /* shouldComponentUpdate(nextProps, nextState) {
     this.getListfavSongs();
     return true;
   }
 
   componentDidUpdate(prevProps, prevState) {
     this.getListfavSongs();
-  }
+  } */
 
   getListfavSongs = async () => {
     this.setState({ loading: true,
@@ -34,23 +34,23 @@ export default class Favorites extends Component {
     });
   }
 
-  markFavoriteSong = async ({ target }) => {
+  /* markFavoriteSong = async ({ target }) => {
     const { name, checked } = target;
     const { music } = this.props;
     this.setState({
       [name]: checked,
       loading: true },
     async () => {
-      if (checked) { // caso checked seja verdadeiro... (para deixar mais claro, caso a checkbox tenha sido marcada, ele adicionará a musica aos favoritos)
-        await addSong(music); // ...chama a função que salva a musica favorita.
-      } else { // caso contrário... (para deixar mais claro, caso seja desmarcado a checkbox ele removerá a musica dos favoritos)
-        await removeSong(music); // ...chama a função que remove a musica salva
+      if (checked) {
+        await addSong(music);
+      } else {
+        await removeSong(music);
       }
       this.setState({
-        favSong: await getFavoriteSongs(), // Ele adiciona as musicas que acabaram de ser salvas usando a função getFavoritesSongs
-        loading: false }); // remove loading
+        favSong: await getFavoriteSongs(),
+        loading: false });
     });
-  }
+  } */
 
   render() {
     const {
