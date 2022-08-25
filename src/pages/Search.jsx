@@ -16,12 +16,14 @@ export default class Search extends Component {
     albumArtist: '',
   }
 
-  /*   componentDidMount() {
+  /* componentDidMount() {
     this.onSearchSubmit();
   } */
 
   onSearchSubmit = async () => {
     const { name } = this.state;
+    const test = await searchAlbumsAPI(name);
+    console.log(test);
     this.setState({
       albumArtist: name,
       loading: true,
@@ -46,12 +48,6 @@ export default class Search extends Component {
     }
   }
 
-  /*   saveListAlbumSearch() {
-    this.setState(({ albumList, albumObj }) => ({
-      albumList: [...albumList, albumObj],
-    }));
-  }
- */
   render() {
     const {
       isSubmiteButtonDisabled,
