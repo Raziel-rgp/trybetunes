@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Header from '../components/Header';
-import { addSong, getFavoriteSongs, removeSong } from '../services/favoriteSongsAPI';
+import { getFavoriteSongs, removeSong } from '../services/favoriteSongsAPI';
 import MusicCard from '../components/MusicCard';
 import Loading from '../components/Loading';
 
@@ -29,23 +29,16 @@ export default class Favorites extends Component {
     });
   }
 
-  markFavoriteSong = async (i, music) => {
-    const { target } = i;
-    const { name, checked } = target;
+  markFavoriteSong = async (music) => {
+    console.log('sla');
     this.setState({
-      [name]: checked,
       loading: true },
     async () => {
-      if (checked) {
-        await addSong(music);
-      } else {
-        await removeSong(music);
-        this.componentDidUpdate = () => {
-          this.getListfavSongs();
-        };
-      }
+      await removeSong(music);
+      const s = await getFavoriteSongs();
+      console.log(s);
       this.setState({
-        favSong: await getFavoriteSongs(),
+        favSong: s,
         loading: false });
     });
   }
@@ -73,17 +66,18 @@ export default class Favorites extends Component {
         <Header />
         { loading ? (<Loading />) : (
           <div>
+            Favorita
             { condition }
             {favSong.map((music) => (
               <div key={ music.collectionId }>
                 { music.previewUrl
-                  && <MusicCard
-                    trackId={ music.trackId }
-                    trackName={ music.trackName }
-                    previewUrl={ music.previewUrl }
-                    music={ music }
-                    onChange={ () => this.songRemoved() }
-                  />}
+                    && <MusicCard
+                      trackId={ music.trackId }
+                      trackName={ music.trackName }
+                      previewUrl={ music.previewUrl }
+                      music={ music }
+                      onChange={ () => this.markFavoriteSong(music) }
+                    />}
               </div>
             ))}
           </div>

@@ -53,7 +53,7 @@ export default class MusicCard extends Component {
   }
 
   render() {
-    const { music } = this.props; // prop passada em Album, lá terá a explicação do que está sendo passado em outro momento;
+    const { music, onChange = this.markFavoriteSong } = this.props; // prop passada em Album, lá terá a explicação do que está sendo passado em outro momento;
     const { loading,
       favSong } = this.state; // states que serão passados
     const {
@@ -61,6 +61,8 @@ export default class MusicCard extends Component {
       previewUrl,
       trackId,
     } = music;
+
+    const favWorkPls = favSong.some((fav) => fav.trackId === music.trackId);
     return (
       <div>
         <p>{ trackName }</p>
@@ -69,14 +71,15 @@ export default class MusicCard extends Component {
           O seu navegador não suporta o elemento
           <code>audio</code>
         </audio>
-
-        <label htmlFor="favorita">
-          Favorita
+        <label htmlFor="checkbox">
+          <span className="hide-label">Favorita</span>
           <input
             data-testid={ `checkbox-music-${trackId}` }
             type="checkbox"
-            checked={ favSong.some((fav) => fav.trackId === music.trackId) }
-            onChange={ this.markFavoriteSong }
+            name="checkbox"
+            id="checkbox"
+            checked={ favWorkPls }
+            onChange={ onChange }
           />
         </label>
         {loading && <Loading />}
@@ -90,4 +93,5 @@ MusicCard.propTypes = {
     previewUrl: PropTypes.string.isRequired,
     trackId: PropTypes.number.isRequired,
   }).isRequired,
+  onChange: PropTypes.func.isRequired,
 };
